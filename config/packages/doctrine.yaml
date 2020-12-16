@@ -1,0 +1,42 @@
+doctrine:
+    dbal:
+        url: '%env(resolve:DATABASE_URL)%'
+
+        driver: 'pdo_pgsql'
+        server_version: '12.2'
+        charset: utf8
+        default_table_options:
+            charset: utf8
+            collate: -
+
+        types:
+            product_id: 'App\Model\Product\Entity\IdType'
+            brand_id: 'App\Model\Brand\Entity\IdType'
+            catalog_id: 'App\Model\Catalog\Entity\IdType'
+            product_status: 'App\Model\Product\Entity\StatusType'
+            catalog_status: 'App\Model\Catalog\Entity\StatusType'
+
+    orm:
+        auto_generate_proxy_classes: true
+        naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
+        auto_mapping: true
+        mappings:
+            Catalog:
+                is_bundle: false
+                type: annotation
+                dir: '%kernel.project_dir%/src/Model/Catalog/Entity'
+                prefix: 'App\Model\Catalog\Entity'
+                alias: Catalog
+            Product:
+                is_bundle: false
+                type: annotation
+                dir: '%kernel.project_dir%/src/Model/Product/Entity'
+                prefix: 'App\Model\Product\Entity'
+                alias: Product
+            Brand:
+                is_bundle: false
+                type: annotation
+                dir: '%kernel.project_dir%/src/Model/Brand/Entity'
+                prefix: 'App\Model\Brand\Entity'
+                alias: Brand
+
